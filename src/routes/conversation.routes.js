@@ -11,4 +11,6 @@ conversationRouter.get('/:userId', conversationController.getUserConversations);
 
 conversationRouter.post('/global', conversationController.createGlobalChat);
 
+conversationRouter.post('/add-new-user-global', conversationController.adduserInGloablChat);
+
 export default conversationRouter;

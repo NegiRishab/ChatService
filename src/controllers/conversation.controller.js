@@ -31,5 +31,15 @@ conversationController.createGlobalChat=async(req,res)=>{
   }
 };
 
+conversationController.adduserInGloablChat=async(req,res)=>{
+  try {
+   const {userId,orgId}=req.body;
+    const conversations = await conversationService.checkAndAddNewUser(userId,orgId);
+    res.status(200).json(conversations);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 
 export default conversationController;

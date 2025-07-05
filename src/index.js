@@ -27,8 +27,6 @@ app.use(cors({
   credentials: true                // if using cookies or auth headers
 }));
 
-
-
 app.use(express.json());
 
 app.use('/api/conversations', conversationRouter);
