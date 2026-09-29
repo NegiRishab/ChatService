@@ -1,5 +1,6 @@
-
 import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import http from "http";
 import {Server} from "socket.io";
@@ -11,20 +12,24 @@ import messageRouter from "./routes/message.routes.js";
 import cors from "cors";
 
 const app = express();
-dotenv.config();
 const server = http.createServer(app);
+
+const frontendOrigins = (process.env.FRONTEND_URL || "")
+  .split(",")
+  .map((url) => url.trim())
+  .filter(Boolean);
 
 const io = new Server(server, {
   cors: {
-    origin: process.env.FRONTEND_URL,
+    origin: frontendOrigins,
     methods: ['GET', 'POST'],
     credentials: true
   }
 });
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
-  credentials: true                // if using cookies or auth headers
+  origin: frontendOrigins,
+  credentials: true
 }));
 
 app.use(express.json());
