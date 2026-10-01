@@ -1,9 +1,9 @@
-FROM node:20-bookworm-slim AS deps
+FROM node:24-trixie-slim AS deps
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --omit=dev
 
-FROM node:20-bookworm-slim AS app
+FROM node:24-trixie-slim AS app
 WORKDIR /app
 RUN apt-get update \
     && apt-get install -y --no-install-recommends dumb-init \
